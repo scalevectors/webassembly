@@ -14,7 +14,7 @@ Module['onRuntimeInitialized'] = function() {
     var ppcStr = Module._malloc(4);
     Module._queryString(ppcStr); 
 
-    //  Use Module.HEAP32[qptr >> 2] or Module.HEAP32[qptr / 4] or Module.getValue(ppcStr, "i32")
+    //  Use Module.HEAP32[ppcStr >> 2] or Module.HEAP32[ppcStr / 4] or Module.getValue(ppcStr, "i32")
     //  You will get the same results
     var pcStr = Module.getValue(ppcStr, "i32");
     var jsStr = Module.UTF8ToString(pcStr);
