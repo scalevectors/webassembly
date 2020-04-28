@@ -1,0 +1,20 @@
+<html>
+  <head>
+
+  </head>
+  <body>
+    <script src="wasmInit.js">
+    </script>
+    <script>
+      // loadWasm defined in wasmInit.js 
+      loadWasm("build/compute.wasm")
+      .then(({instance}) => {
+        let add = instance.exports.add;
+        let substract = instance.exports.substract;
+
+        console.log("add (44 + 7):" + add(44, 7));
+        console.log("substract (44 - 7):" + substract(44, 7));
+      })
+    </script>
+  </body>
+</html>
