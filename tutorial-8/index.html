@@ -1,0 +1,39 @@
+<html>
+  <head>
+
+  </head>
+  <body>
+    <script src="wasmInit.js">
+    </script>
+    <script>
+
+      // loadWasm defined in wasmInit.js 
+      loadWasm("build/addsubstract.wasm", {})
+      .then(({instance}) => {
+        let add = instance.exports.add;
+        let substract = instance.exports.substract;
+
+        console.log("add (8 + 7): " + add(8, 7));
+        console.log("substract (9 - 7): " + substract(9, 7));
+      });
+
+      const env = {
+        jsMultiply: function (i, j) {
+          return i * j;
+        },
+        jsDivide: function (i, j) {
+          return i / j;
+        }
+      };
+      // loadWasm defined in wasmInit.js 
+      loadWasm("build/multiplydivide.wasm", {env})
+      .then(({instance}) => {
+        let multiply = instance.exports.multiply;
+        let divide = instance.exports.divide;
+        console.log("multiply (10 * 7): " + multiply(10, 7));
+        console.log("divide (44 / 2): " + divide(44, 2));
+      })
+      
+    </script>
+  </body>
+</html>
