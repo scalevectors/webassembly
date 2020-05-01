@@ -1,0 +1,41 @@
+<html>
+  <head></head>
+  <body>
+    <script type= "text/javascript">
+        var output = [];
+        // WebAssembly module config
+        var Module = {
+        // Don't automatically run main() function on page load
+        noInitialRun: true,
+
+        print: stdout => output += (stdout + "\r\n"),
+
+        // When the module is ready, enable the "Run" button
+        onRuntimeInitialized: function () {
+          document .getElementById( "Add" ).disabled = false;
+          }
+        }
+
+        function add(i, j){
+          output = [];
+          Module.callMain([i.toString(), j.toString()]);
+          document .getElementById( "output" ).value = output;
+        }
+
+      // On page load
+      document .addEventListener( "DOMContentLoaded" , function () {
+          // On button click
+          document .getElementById( "Add" ).addEventListener( "click", function () {
+            add(document.getElementById("i").value, document.getElementById("j").value);
+          });
+      });
+    </script>
+    <script src="build/app.js">
+    </script>
+
+  <input id= "i" type= "text" value= "5">
+  <input id= "j" type= "text" value= "6">
+  <input id= "Add" type= "button" value= "Add" disabled><br/>
+  <textarea id= "output"></textarea>
+  </body>
+</html>
